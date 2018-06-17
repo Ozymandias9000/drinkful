@@ -83,23 +83,22 @@ class Main extends Component {
   async fetchBeers(e) {
     e.preventDefault();
     this.setState({ loading: true });
-    // change to REACT_APP_API_BASE before build
-    fetch(
-      `https://api.punkapi.com/v2/beers?beer_name=${
-        this.state.searchInput
-      }&per_page=6`
-    )
-      .then(res => res.json())
-      .then(data => this.setState({ beers: data, loading: false }))
-      // .then(console.log(this.state.beers))
-      .catch(error => {
-        console.log("Error", error);
-        this.setState({
-          error: error.errorMessage,
-          loading: false
-        });
-      });
-    // console.log(this.state);
+
+    // change URL to REACT_APP_API_BASE before build
+    // fetch(
+    //   `https://api.punkapi.com/v2/beers?beer_name=${
+    //     this.state.searchInput
+    //   }&per_page=6`
+    // )
+    //   .then(res => res.json())
+    //   .then(data => this.setState({ beers: data, loading: false }))
+    //   .catch(error => {
+    //     console.log("Error", error);
+    //     this.setState({
+    //       error: error.errorMessage,
+    //       loading: false
+    //     });
+    //   });
   }
 
   updateSearchInput(e) {
