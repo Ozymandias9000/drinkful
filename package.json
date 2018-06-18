@@ -1,23 +1,24 @@
 {
-  "name": "drinkful",
-  "version": "0.1.0",
+  "name": "drinkful-server",
+  "version": "0.0.0",
   "private": true,
-  "dependencies": {
-    "dotenv": "^6.0.0",
-    "express": "^4.16.3",
-    "react": "^16.4.1",
-    "react-dom": "^16.4.1",
-    "react-router-dom": "^4.3.1",
-    "react-scripts": "1.1.4"
-  },
   "scripts": {
-    "start": "react-scripts-with-stylus start src/app.styl",
-    "build": "react-scripts-with-stylus build src/app.styl",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "start": "node ./bin/www",
+    "server": "nodemon ./server.js"
   },
-  "proxy": "http://localhost:7777",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "body-parser": "^1.18.3",
+    "cheerio": "^1.0.0-rc.2",
+    "cookie-parser": "~1.4.3",
+    "cors": "^2.8.4",
+    "debug": "~2.6.9",
+    "express": "~4.16.0",
+    "http-errors": "~1.6.2",
+    "jade": "~1.11.0",
+    "morgan": "~1.9.0"
+  },
   "devDependencies": {
-    "create-react-app-stylus": "^1.1.1"
+    "nodemon": "^1.17.5"
   }
 }

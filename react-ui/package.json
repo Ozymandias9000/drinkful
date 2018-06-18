@@ -1,0 +1,23 @@
+{
+  "name": "drinkful",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "dotenv": "^6.0.0",
+    "express": "^4.16.3",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "1.1.4"
+  },
+  "scripts": {
+    "start": "react-scripts-with-stylus start src/app.styl",
+    "build": "react-scripts-with-stylus build src/app.styl",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "proxy": "http://localhost:7777",
+  "devDependencies": {
+    "create-react-app-stylus": "^1.1.1"
+  }
+}
