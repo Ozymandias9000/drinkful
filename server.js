@@ -4,20 +4,18 @@ const path = require("path");
 const logger = require("morgan");
 const cors = require("cors");
 const bodyParser = require("body-parser");
-
-var beerRouter = require("./routes/beer");
-
 const app = express();
 
 app.use(cors());
-
 app.use(logger("dev"));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, "./react-ui/build")));
 
+const beerRouter = require("./routes/beer");
 app.use("/beers", beerRouter);
 
+// Other requests return React app so it can handle routing with ReactRouter
 app.get("*", function(req, res) {
   res.sendFile(path.resolve(__dirname, "./react-ui/build", "index.html"));
 });

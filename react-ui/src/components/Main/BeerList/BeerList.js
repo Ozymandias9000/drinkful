@@ -12,7 +12,7 @@ class BeerList extends Component {
 
     return (
       <div className="beer-list--container">
-        {beers.map(beer => <BeerCard beer={beer} key={beer.id} />)}
+        {beers.map((beer, index) => <BeerCard beer={beer} key={index} />)}
       </div>
     );
   }

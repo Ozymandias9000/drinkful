@@ -18,8 +18,23 @@ exports.fetchBeer = async (req, res, next) => {
               .find($("li a:first-child"))
               .each(function(i, elem) {
                 list[i] = {
-                  name: $(this).text()
+                  name: $(this).text(),
+                  href: $(this).attr("href")
                 };
+              });
+            $(this)
+              .find($("li a:nth-of-type(2)"))
+              .each(function(i, elem) {
+                let text = $(this).text();
+                if (text.indexOf("-") !== -1) {
+                  text = text.slice(0, text.indexOf("-"));
+                }
+                list[i] = Object.assign(
+                  {
+                    brewery: text
+                  },
+                  list[i]
+                );
               });
           });
         }

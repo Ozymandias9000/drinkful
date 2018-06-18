@@ -3,10 +3,17 @@ import "./BeerCard.styl";
 
 class BeerCard extends Component {
   render() {
-    let { name, tagline, image_url, description, abv, ibu } = this.props.beer;
+    let { name, brewery, href } = this.props.beer;
+    if (!name || !brewery) return null;
+
     return (
       <div className="beer-card" tabIndex="0">
-        <img
+        <a
+          href={`https://www.beeradvocate.com` + href}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {/* <img
           src={image_url}
           alt="beer"
           style={{
@@ -14,13 +21,14 @@ class BeerCard extends Component {
             width: "auto",
             paddingRight: 20 + "px"
           }}
-        />
-        <div>
-          <h4>{name}</h4>
-          <h5>{tagline}</h5>
-          <p>ABV: {abv}%</p>
-          <p>IBU : {ibu}</p>
-        </div>
+        /> */}
+          <div>
+            <h4>{name}</h4>
+            <h6>{brewery}</h6>
+            {/* <p>ABV: {abv}%</p>
+          <p>IBU : {ibu}</p> */}
+          </div>
+        </a>
       </div>
     );
   }
