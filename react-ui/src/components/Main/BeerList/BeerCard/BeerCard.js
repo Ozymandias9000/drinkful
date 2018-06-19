@@ -1,50 +1,26 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import "./BeerCard.styl";
 
 class BeerCard extends Component {
   render() {
     let { name, brewery, beerHref, breweryHref } = this.props.beer;
-    const { fetchOneBeer } = this.props;
 
     if (!name || !brewery) return null;
 
     return (
-      <div
-        className="beer-card"
-        tabIndex="0"
-        onClick={() => fetchOneBeer(beerHref)}
-      >
-        {/* <img
-          src={image_url}
-          alt="beer"
-          style={{
-            height: 200 + "px",
-            width: "auto",
-            paddingRight: 20 + "px"
+      <div className="beer-card" tabIndex="0">
+        <Link
+          to={{
+            pathname: `/beers${beerHref}`,
+            state: { name, brewery, beerHref, breweryHref }
           }}
-        /> */}
-        <div>
-          <h4>
-            {/* <a
-              href={`https://www.beeradvocate.com` + beerHref}
-              target="_blank"
-              rel="noopener noreferrer"
-            > */}
-            {name}
-            {/* </a>{" "} */}
-          </h4>
-          <h6>
-            {/* <a
-              href={`https://www.beeradvocate.com` + breweryHref}
-              target="_blank"
-              rel="noopener noreferrer"
-            > */}
-            {brewery}
-            {/* </a> */}
-          </h6>
-          {/* <p>ABV: {abv}%</p>
-          <p>IBU : {ibu}</p> */}
-        </div>
+        >
+          <div>
+            <h4>{name}</h4>
+            <h6>{brewery}</h6>
+          </div>
+        </Link>
       </div>
     );
   }

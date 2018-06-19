@@ -14,7 +14,7 @@ class Search extends Component {
             name="search--input"
             onChange={updateSearchInput}
           />
-          <input type="submit" />
+          <input type="submit" value='Search' />
         </form>
       </div>
     );

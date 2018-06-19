@@ -15,7 +15,7 @@ exports.fetchBeer = async (req, res) => {
           const $ = cheerio.load(html);
           $("#ba-content").each(function(i, elem) {
             $(this)
-              .find($("li a:first-child"))
+              .find($("li a:first-of-type"))
               .each(function(i, elem) {
                 list[i] = {
                   name: $(this).text(),
@@ -40,20 +40,36 @@ exports.fetchBeer = async (req, res) => {
       },
       err => console.log(err)
     );
-  console.log(list);
   res.status(200).json(list);
 };
 
 exports.fetchOneBeer = async (req, res) => {
-  const { breweryId, beerId } = req.params;
+  const { beerHref } = req.body;
 
-  await axios
-    .get(`https://www.beeradvocate.com/beer/profile/${breweryId}/${beerId}`)
-    .then(res => {
+  let beerDetails = {
+    avgScore: "",
+    imgSrc: "",
+    style: ""
+  };
+
+  await axios.get(`https://www.beeradvocate.com${beerHref}`).then(
+    res => {
       if (res.status === 200) {
         const html = res.data;
         const $ = cheerio.load(html);
-        $("#ba-content").each(function(i, elem) {});
+
+        beerDetails.avgScore = $("#ba-content")
+          .find(".ba-ravg")
+          .text();
+        beerDetails.imgSrc = $("#main_pic_norm")
+          .find("div:first-child img")
+          .attr("src");
+        beerDetails.style = $("#info_box")
+          .find("a:nth-of-type(5)")
+          .text();
       }
-    });
+    },
+    err => console.log(err)
+  );
+  res.status(200).json(beerDetails);
 };

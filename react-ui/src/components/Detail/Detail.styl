@@ -1,0 +1,46 @@
+.detail--container
+  height 90vh
+  width 100vw
+  display flex
+  justify-content center
+  align-items center
+
+.detail--innerbox
+  width: 90vw
+  display flex
+  justify-content center
+
+.detail--textbox
+  display grid
+  justify-content: center
+  margin-left 50px
+  letter-spacing 2px
+  border 2px solid #bada55
+  & h1, h2, h3, h4, h5, h6
+    margin 6px
+  & a
+    color #0033bb
+    text-decoration none
+
+.detail--innerbox img
+  grid-column: 1/ span 1;
+  grid-row: 1 / -1
+  height: 200px
+  width auto
+  // border-radius 10px
+  border 2px solid #bada55
+
+@media only screen and (min-width: 780px)
+
+  .detail--textbox
+
+    width 500px
+    & h4
+      font-size 2rem
+    & h5
+      font-size 1.2rem
+    & h6
+      font-size 1rem
+
+  .detail--innerbox img
+    height 300px
