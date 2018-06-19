@@ -1,7 +1,7 @@
 const axios = require("axios");
 const cheerio = require("cheerio");
 
-exports.fetchBeer = async (req, res, next) => {
+exports.fetchBeer = async (req, res) => {
   let list = [];
   // Prep the search for URL
   const search = req.body.searchInput.replace(/\s/g, "+");
@@ -19,7 +19,7 @@ exports.fetchBeer = async (req, res, next) => {
               .each(function(i, elem) {
                 list[i] = {
                   name: $(this).text(),
-                  href: $(this).attr("href")
+                  beerHref: $(this).attr("href")
                 };
               });
             $(this)
@@ -29,17 +29,31 @@ exports.fetchBeer = async (req, res, next) => {
                 if (text.indexOf("-") !== -1) {
                   text = text.slice(0, text.indexOf("-"));
                 }
-                list[i] = Object.assign(
-                  {
-                    brewery: text
-                  },
-                  list[i]
-                );
+                list[i] = {
+                  ...list[i],
+                  brewery: text,
+                  breweryHref: $(this).attr("href")
+                };
               });
           });
         }
       },
       err => console.log(err)
     );
+  console.log(list);
   res.status(200).json(list);
+};
+
+exports.fetchOneBeer = async (req, res) => {
+  const { breweryId, beerId } = req.params;
+
+  await axios
+    .get(`https://www.beeradvocate.com/beer/profile/${breweryId}/${beerId}`)
+    .then(res => {
+      if (res.status === 200) {
+        const html = res.data;
+        const $ = cheerio.load(html);
+        $("#ba-content").each(function(i, elem) {});
+      }
+    });
 };

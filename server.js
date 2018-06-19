@@ -14,6 +14,7 @@ app.use(express.static(path.join(__dirname, "./react-ui/build")));
 
 const beerRouter = require("./routes/beer");
 app.use("/beers", beerRouter);
+app.use("/beers/beer/profile/:breweryId/:beerId", beerRouter);
 
 // Other requests return React app so it can handle routing with ReactRouter
 app.get("*", function(req, res) {

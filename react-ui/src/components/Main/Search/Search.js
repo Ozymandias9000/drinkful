@@ -3,15 +3,16 @@ import "./Search.styl";
 
 class Search extends Component {
   render() {
+    const { fetchBeers, updateSearchInput } = this.props;
     return (
       <div className="search--box">
-        <form onSubmit={this.props.fetchBeers}>
+        <form onSubmit={fetchBeers}>
           <input
             type="text"
             placeholder="Search for beer!"
             id="search--input"
             name="search--input"
-            onChange={this.props.updateSearchInput}
+            onChange={updateSearchInput}
           />
           <input type="submit" />
         </form>

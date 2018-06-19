@@ -4,7 +4,7 @@ import BeerCard from "./BeerCard/BeerCard";
 
 class BeerList extends Component {
   render() {
-    let { beers } = this.props;
+    let { beers, fetchOneBeer } = this.props;
 
     if (!beers) {
       return <p>Nothing to show!</p>;
@@ -12,7 +12,9 @@ class BeerList extends Component {
 
     return (
       <div className="beer-list--container">
-        {beers.map((beer, index) => <BeerCard beer={beer} key={index} />)}
+        {beers.map((beer, index) => (
+          <BeerCard beer={beer} key={index} fetchOneBeer={fetchOneBeer} />
+        ))}
       </div>
     );
   }
