@@ -10,6 +10,11 @@ class Nav extends Component {
           <h1>Drinkful</h1>
         </Link>
         <div>
+          <p>
+            <Link to="/hearted" class="heart-link">
+              Hearts
+            </Link>
+          </p>
           <p>Log In</p>
           <p>Sign Up</p>
         </div>

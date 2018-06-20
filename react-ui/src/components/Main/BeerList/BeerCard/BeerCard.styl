@@ -1,5 +1,6 @@
 .beer-card
   display flex
+  flex-direction column
   justify-content center
   align-items center
   border 2px solid #bada55
@@ -9,13 +10,10 @@
   &:focus, &:hover
     transform scale(1.05)
 
+.beer-card img
+  height 32px
+  width auto
+
 .beer-card a
   color black
   text-decoration none
-// .beer-card p
-//   display inline-block
-//   margin-right 10px
-//   font-size .6rem
-//   font-weight 600
-//   &:before
-//     content "• "
