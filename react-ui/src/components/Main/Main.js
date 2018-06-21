@@ -19,13 +19,16 @@ class Main extends Component {
 
   componentDidMount() {
     this.setState({ loading: false });
+    if (this.props.location.state) {
+      this.setState({
+        beers: this.props.location.state.beers
+      });
+    }
   }
 
-  async fetchBeers(e) {
-    e.preventDefault();
+  async fetchBeers() {
     this.setState({ loading: true });
 
-    // change URL to REACT_APP_API_BASE before build
     fetch("/beers", {
       headers: {
         "content-type": "application/json"
@@ -66,7 +69,7 @@ class Main extends Component {
           updateSearchInput={this.updateSearchInput}
           fetchBeers={this.fetchBeers}
         />
-        <BeerList beers={beers} />
+        <BeerList beers={beers} mainState={this.state} />
       </main>
     );
   }

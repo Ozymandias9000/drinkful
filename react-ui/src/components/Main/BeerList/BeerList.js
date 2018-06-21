@@ -4,15 +4,13 @@ import BeerCard from "./BeerCard/BeerCard";
 
 class BeerList extends Component {
   render() {
-    let { beers } = this.props;
-
-    if (!beers) {
-      return <p>Nothing to show!</p>;
-    }
+    let { beers, mainState } = this.props;
 
     return (
       <div className="beer-list--container">
-        {beers.map((beer, index) => <BeerCard beer={beer} key={index} />)}
+        {beers.map((beer, index) => (
+          <BeerCard beer={beer} key={index} mainState={mainState} />
+        ))}
       </div>
     );
   }

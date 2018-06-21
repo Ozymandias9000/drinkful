@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./Detail.styl";
 import Loading from "../Loading/Loading";
+import { Link } from "react-router-dom";
 
 class Detail extends Component {
   constructor(props) {
@@ -68,6 +69,8 @@ class Detail extends Component {
       loading
     } = this.state;
 
+    const { mainState } = this.props.location.state;
+
     if (loading) {
       return (
         <div className="loading--container">
@@ -75,7 +78,6 @@ class Detail extends Component {
         </div>
       );
     }
-
     return (
       <main>
         <div className="detail--container">
@@ -104,6 +106,11 @@ class Detail extends Component {
               <h6>{avgScore} out of 5 - BeerAdvocate</h6>
             </div>
           </div>
+        </div>
+        <div className="back-button--container">
+          <Link to={{ pathname: "/", state: mainState }}>
+            <button>Back to Results</button>
+          </Link>
         </div>
       </main>
     );

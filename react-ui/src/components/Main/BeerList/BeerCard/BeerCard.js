@@ -34,7 +34,8 @@ class BeerCard extends Component {
   };
 
   render() {
-    let { name, brewery, beerHref, breweryHref } = this.props.beer;
+    const { name, brewery, beerHref, breweryHref } = this.props.beer;
+    const { mainState } = this.props;
 
     if (!name || !brewery) return null;
 
@@ -48,7 +49,7 @@ class BeerCard extends Component {
         <Link
           to={{
             pathname: `/beers${beerHref}`,
-            state: { name, brewery, beerHref, breweryHref }
+            state: { name, brewery, beerHref, breweryHref, mainState }
           }}
         >
           <div>
