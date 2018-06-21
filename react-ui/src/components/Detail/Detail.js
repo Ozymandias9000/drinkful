@@ -101,7 +101,7 @@ class Detail extends Component {
                 </a>
               </h5>
               <h6>{style}</h6>
-              <h6>{avgScore} out of 5</h6>
+              <h6>{avgScore} out of 5 - BeerAdvocate</h6>
             </div>
           </div>
         </div>

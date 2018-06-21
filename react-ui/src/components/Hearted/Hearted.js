@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import "./Hearted.styl";
 import BeerList from "../Main/BeerList/BeerList";
 
 class Hearted extends Component {

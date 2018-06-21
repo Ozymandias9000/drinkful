@@ -25,9 +25,8 @@ input[type='text']
   border 1px solid gray
   padding 5px
   width 300px
-
-input[type='text']:focus
-  background rgba(0,0,0,.03)
+  &:focus
+    background rgba(0,0,0,.03)
 
 input
   height 40px
@@ -39,6 +38,7 @@ input
   border-radius 3px
 
 input[type='submit']
+  position relative
   justify-content center
   padding 6px 9px 6px 9px
   background gray
@@ -46,9 +46,15 @@ input[type='submit']
   margin-left 10px
   border 1px solid gray
   cursor pointer
+  box-shadow: 0 1px 2px rgba(0,0,0,0.12), 0 1px 1px rgba(0,0,0,0.24);
+  transition all .2s
   &:hover
     color gray
     background white
+  &:active
+    outline none
+    top 2px
+    box-shadow inset 0px 0px 4px
 
 @media only screen and ( max-width: 430px )
   form
