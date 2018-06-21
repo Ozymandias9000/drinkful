@@ -11,7 +11,7 @@ class Nav extends Component {
         </Link>
         <div>
           <p>
-            <Link to="/hearted" class="heart-link">
+            <Link to="/hearted" className="heart-link">
               Hearts
             </Link>
           </p>

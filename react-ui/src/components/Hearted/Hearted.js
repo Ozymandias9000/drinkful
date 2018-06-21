@@ -1,12 +1,31 @@
 import React, { Component } from "react";
 import "./Hearted.styl";
+import BeerList from "../Main/BeerList/BeerList";
 
 class Hearted extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      heartedBeers: []
+    };
+  }
+
+  componentDidMount() {
+    const heartedBeers = [];
+    for (let i = 0; i < localStorage.length; i++) {
+      let beerObj = JSON.parse(localStorage.key(i));
+      heartedBeers.push(beerObj);
+    }
+    this.setState({ heartedBeers });
+  }
+
   render() {
     return (
       <div>
-        <h1>Hearts</h1>
-        {console.log(localStorage.key(1))}
+        <h1 style={{ textAlign: "center" }}>Hearted Beers</h1>
+        <div id="hearted-results">
+          {<BeerList beers={this.state.heartedBeers} />}
+        </div>
       </div>
     );
   }

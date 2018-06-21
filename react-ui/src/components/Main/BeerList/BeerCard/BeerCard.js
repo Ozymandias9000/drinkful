@@ -13,17 +13,24 @@ class BeerCard extends Component {
         "https://upload.wikimedia.org/wikipedia/commons/4/42/Love_Heart_SVG.svg"
     };
   }
+
+  componentDidMount() {
+    const beer = JSON.stringify(this.props.beer);
+    localStorage[`${beer}`] === "hearted" ? this.heartBeer() : false;
+  }
+
   heartBeer = () => {
-    this.setState(prevState => ({
-      isHearted: !prevState.isHearted
-    }));
-    const { name, brewery } = this.props.beer;
-    // Don't understand why this needs !.
-    // Check state in debugger.
-    !this.state.isHearted
-      ? localStorage.setItem(`${name} - ${brewery}`, "hearted")
-      : localStorage.removeItem(`${name} - ${brewery}`);
-    console.log(localStorage);
+    this.setState(
+      prevState => ({
+        isHearted: !prevState.isHearted
+      }),
+      // Executed as callback to await pending setState update
+      () => {
+        this.state.isHearted
+          ? localStorage.setItem(JSON.stringify(this.props.beer), "hearted")
+          : localStorage.removeItem(JSON.stringify(this.props.beer));
+      }
+    );
   };
 
   render() {
