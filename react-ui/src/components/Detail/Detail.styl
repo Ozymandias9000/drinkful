@@ -1,15 +1,17 @@
-.detail--container
+.main--container
   height 90vh
   width 100vw
-  display flex
+
+.detail--container
+  display grid
+  width auto
+  grid-template-rows: 400px 150px
   justify-content center
   align-items center
 
 .detail--innerbox
-  width: 90vw
   display flex
   justify-content center
-
 
 .detail--textbox
   text-align center
@@ -36,11 +38,10 @@
   box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 
 .back-button--container
+  grid-row 2 / span 1
   display flex
   justify-content center
   align-items center
-  position relative
-  bottom 150px
 
 .back-button--container button
   position fixed
@@ -84,7 +85,7 @@
 
   .back-button--container button
     height 50px
-    width auto
+    width 752px
     font-size 1rem
     position relative
     border-radius 3px

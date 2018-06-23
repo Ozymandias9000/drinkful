@@ -18,6 +18,7 @@ class Main extends Component {
   }
 
   componentDidMount() {
+    window.scrollTo(0, 0);
     this.setState({ loading: false });
     if (this.props.location.state) {
       this.setState({

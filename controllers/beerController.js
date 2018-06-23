@@ -3,6 +3,7 @@ const cheerio = require("cheerio");
 
 exports.fetchBeer = async (req, res) => {
   let list = [];
+
   // Prep the search for URL
   const search = req.body.searchInput
     .trim()

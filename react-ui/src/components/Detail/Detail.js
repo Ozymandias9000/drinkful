@@ -20,6 +20,7 @@ class Detail extends Component {
   }
 
   componentDidMount() {
+    window.scrollTo(0, 0);
     const { beerHref } = this.state;
     this.fetchOneBeer(beerHref);
   }
@@ -76,7 +77,7 @@ class Detail extends Component {
       );
     }
     return (
-      <main>
+      <main class="main--container">
         <div className="detail--container">
           <div className="detail--innerbox">
             <img src={imgSrc} alt="beer" />
@@ -103,11 +104,11 @@ class Detail extends Component {
               <h6>{avgScore} out of 5 - BeerAdvocate</h6>
             </div>
           </div>
-        </div>
-        <div className="back-button--container">
-          <Link to={{ pathname: "/", state: mainState }}>
-            <button>Back to Results</button>
-          </Link>
+          <div className="back-button--container">
+            <Link to={{ pathname: "/", state: mainState }}>
+              <button>Back to Results</button>
+            </Link>
+          </div>
         </div>
       </main>
     );

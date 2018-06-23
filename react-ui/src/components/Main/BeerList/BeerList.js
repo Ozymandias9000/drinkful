@@ -3,6 +3,10 @@ import "./BeerList.styl";
 import BeerCard from "./BeerCard/BeerCard";
 
 class BeerList extends Component {
+  componentDidMount() {
+    window.scrollTo(0, 0);
+  }
+
   render() {
     let { beers, mainState } = this.props;
 
