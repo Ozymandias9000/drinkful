@@ -1,15 +1,17 @@
 import React, { Component } from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { Router, Route, Switch } from "react-router-dom";
+import configureHistory from "./configureHistory";
 import "./app.styl";
 import Nav from "./components/Nav/Nav";
 import Main from "./components/Main/Main";
 import Hearted from "./components/Hearted/Hearted";
 import Detail from "./components/Detail/Detail";
+const history = configureHistory();
 
 class App extends Component {
   render() {
     return (
-      <BrowserRouter>
+      <Router history={history}>
         <div className="app">
           <Nav />
           <Switch>
@@ -18,7 +20,7 @@ class App extends Component {
             <Route path="/hearted" component={Hearted} exact />
           </Switch>
         </div>
-      </BrowserRouter>
+      </Router>
     );
   }
 }
