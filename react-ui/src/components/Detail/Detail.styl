@@ -3,11 +3,13 @@
   width 100vw
 
 .detail--container
+  margin-top -100px
   display grid
   width auto
   grid-template-rows: 400px 150px
   justify-content center
   align-items center
+  padding 10px
 
 .detail--innerbox
   display flex
@@ -68,6 +70,9 @@
     box-shadow inset 0px 0px 4px
 
 @media only screen and (min-width: 780px)
+
+  .detail--container
+    margin-top 0
 
   .detail--textbox
     padding: 10px
