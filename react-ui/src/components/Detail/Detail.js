@@ -15,9 +15,7 @@ class Detail extends Component {
       breweryHref,
       avgScore: "",
       imgSrc: "",
-      abv: "",
-      style: "",
-      description: ""
+      style: ""
     };
   }
 
@@ -27,9 +25,8 @@ class Detail extends Component {
   }
 
   async fetchOneBeer(href) {
-    // SET TRUE
     this.setState({ loading: true });
-    // change URL to REACT_APP_API_BASE before build
+
     fetch(`/beers${href}`, {
       headers: {
         "content-type": "application/json"

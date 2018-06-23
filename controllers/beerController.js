@@ -4,7 +4,10 @@ const cheerio = require("cheerio");
 exports.fetchBeer = async (req, res) => {
   let list = [];
   // Prep the search for URL
-  const search = req.body.searchInput.replace(/\s/g, "+");
+  const search = req.body.searchInput
+    .trim()
+    .replace(/\s/g, "+")
+    .toLowerCase();
 
   await axios
     .get(`https://www.beeradvocate.com/search/?q=${search}&qt=beer`)
@@ -13,29 +16,61 @@ exports.fetchBeer = async (req, res) => {
         if (res.status === 200) {
           const html = res.data;
           const $ = cheerio.load(html);
-          $("#ba-content").each(function(i, elem) {
-            $(this)
-              .find($("li a:first-of-type"))
-              .each(function(i, elem) {
-                list[i] = {
-                  name: $(this).text(),
-                  beerHref: $(this).attr("href")
-                };
-              });
-            $(this)
-              .find($("li a:nth-of-type(2)"))
-              .each(function(i, elem) {
-                let text = $(this).text();
-                if (text.indexOf("-") !== -1) {
-                  text = text.slice(0, text.indexOf("-"));
-                }
-                list[i] = {
-                  ...list[i],
-                  brewery: text,
-                  breweryHref: $(this).attr("href")
-                };
-              });
-          });
+
+          // Check if only one beers has matched.
+          // If so, send back just one.
+          const fullHeading = $(".titleBar h1")
+            .text()
+            .split("|");
+          const name = fullHeading[0].trim();
+          const normalizedName = name.toLowerCase().replace(/\s/g, "+");
+
+          if (normalizedName === search) {
+            // get brewery from fullHeading
+            const brewery = fullHeading[1].trim();
+            // get breweryHref from from first a in #info-box
+            const breweryHref = $("#info_box")
+              .find("a:nth-of-type(1)")
+              .attr("href");
+            // get beerHref from combining breweryHref with id from img
+            const img = $("#main_pic_norm")
+              .find("img:nth-of-type(1)")
+              .attr("src");
+            const beerId = img.split("/")[5].split(".")[0];
+            const beerHref = `${breweryHref}${beerId}`;
+
+            list[0] = {
+              name,
+              brewery,
+              breweryHref,
+              beerHref
+            };
+          } else {
+            // Else, send back all search results
+            $("#ba-content").each(function(i, elem) {
+              $(this)
+                .find($("li a:first-of-type"))
+                .each(function(i, elem) {
+                  list[i] = {
+                    name: $(this).text(),
+                    beerHref: $(this).attr("href")
+                  };
+                });
+              $(this)
+                .find($("li a:nth-of-type(2)"))
+                .each(function(i, elem) {
+                  let text = $(this).text();
+                  if (text.indexOf("-") !== -1) {
+                    text = text.slice(0, text.indexOf("-"));
+                  }
+                  list[i] = {
+                    ...list[i],
+                    brewery: text,
+                    breweryHref: $(this).attr("href")
+                  };
+                });
+            });
+          }
         }
       },
       err => console.log(err)
