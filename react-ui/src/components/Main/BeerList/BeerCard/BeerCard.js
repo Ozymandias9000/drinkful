@@ -16,7 +16,7 @@ class BeerCard extends Component {
 
   componentDidMount() {
     const beer = JSON.stringify(this.props.beer);
-    localStorage[`${beer}`] === "hearted" ? this.heartBeer() : false;
+    if (localStorage[`${beer}`] === "hearted") this.heartBeer();
   }
 
   heartBeer = () => {

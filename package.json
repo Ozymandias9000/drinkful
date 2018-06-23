@@ -5,6 +5,7 @@
   "scripts": {
     "start": "node ./server.js",
     "server": "nodemon ./server.js",
+    "build": "react-scripts build",
     "heroku-postbuild": "cd react-ui/ && npm install --only=dev && npm install && npm run build"
   },
   "dependencies": {

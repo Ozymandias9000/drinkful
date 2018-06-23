@@ -5,7 +5,6 @@ import Nav from "./components/Nav/Nav";
 import Main from "./components/Main/Main";
 import Hearted from "./components/Hearted/Hearted";
 import Detail from "./components/Detail/Detail";
-require("dotenv").config({ path: "../.env" });
 
 class App extends Component {
   render() {
