@@ -77,7 +77,7 @@ class Detail extends Component {
       );
     }
     return (
-      <main class="main--container">
+      <main className="main--container">
         <div className="detail--container">
           <div className="detail--innerbox">
             <img src={imgSrc} alt="beer" />

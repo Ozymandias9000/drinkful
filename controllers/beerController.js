@@ -18,6 +18,13 @@ exports.fetchBeer = async (req, res) => {
           const html = res.data;
           const $ = cheerio.load(html);
 
+          // Check if no beers have matched.
+          // If so, let them know.
+          if ($('#ba-content div span li:nth-of-type(1)').text() === 'No results. Try being more specific.' || $('#ba-content div span li:nth-of-type(1)').text() === 'No search words given.') {
+            return Promise.reject(Error('Oh noooo! No results.'));
+
+          }
+
           // Check if only one beers has matched.
           // If so, send back just one.
           const fullHeading = $(".titleBar h1")
@@ -48,10 +55,10 @@ exports.fetchBeer = async (req, res) => {
             };
           } else {
             // Else, send back all search results
-            $("#ba-content").each(function(i, elem) {
+            $("#ba-content").each(function (i, elem) {
               $(this)
                 .find($("li a:first-of-type"))
-                .each(function(i, elem) {
+                .each(function (i, elem) {
                   list[i] = {
                     name: $(this).text(),
                     beerHref: $(this).attr("href")
@@ -59,7 +66,7 @@ exports.fetchBeer = async (req, res) => {
                 });
               $(this)
                 .find($("li a:nth-of-type(2)"))
-                .each(function(i, elem) {
+                .each(function (i, elem) {
                   let text = $(this).text();
                   if (text.indexOf("-") !== -1) {
                     text = text.slice(0, text.indexOf("-"));
@@ -74,8 +81,7 @@ exports.fetchBeer = async (req, res) => {
           }
         }
       },
-      err => console.log(err)
-    );
+  ).catch(err => console.log(err));
   res.status(200).json(list);
 };
 

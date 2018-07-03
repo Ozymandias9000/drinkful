@@ -27,8 +27,13 @@ class Main extends Component {
     }
   }
 
-  async fetchBeers() {
-    this.setState({ loading: true });
+  componentDidUpdate() {
+
+  }
+
+  // TODO: make async
+  fetchBeers() {
+    this.setState({ loading: true, error: null });
 
     fetch("/beers", {
       headers: {
@@ -39,12 +44,16 @@ class Main extends Component {
     })
       .then(res => res.json())
       .then(beers => {
-        this.setState({ beers, loading: false });
+        if (beers.length === 0) {
+          throw new Error('No results found!')
+        } else {
+          this.setState({ beers, loading: false });
+        }
       })
       .catch(error => {
         console.log("Error", error);
         this.setState({
-          error: error.errorMessage,
+          error,
           loading: false
         });
       });
@@ -55,12 +64,24 @@ class Main extends Component {
   }
 
   render() {
-    const { loading, beers } = this.state;
+    const { loading, beers, error } = this.state;
     if (loading) {
       return (
         <div className="loading--container">
           <Loading />
         </div>
+      );
+    }
+
+    if (error) {
+      return (
+        <main className="main--container">
+          <Search
+            updateSearchInput={this.updateSearchInput}
+            fetchBeers={this.fetchBeers}
+          />
+          <p>No results found!</p>
+        </main>
       );
     }
 
