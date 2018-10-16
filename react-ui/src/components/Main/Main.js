@@ -5,17 +5,12 @@ import Search from "./Search/Search";
 import Loading from "../Loading/Loading";
 
 class Main extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      searchInput: "",
-      loading: true,
-      beers: [],
-      error: null
-    };
-    this.updateSearchInput = this.updateSearchInput.bind(this);
-    this.fetchBeers = this.fetchBeers.bind(this);
-  }
+  state = {
+    searchInput: "",
+    loading: true,
+    beers: [],
+    error: null
+  };
 
   componentDidMount() {
     window.scrollTo(0, 0);
@@ -27,12 +22,11 @@ class Main extends Component {
     }
   }
 
-  componentDidUpdate() {
-
-  }
+  componentDidUpdate() {}
 
   // TODO: make async
-  fetchBeers() {
+  fetchBeers = e => {
+    e.preventDefault();
     this.setState({ loading: true, error: null });
 
     fetch("/beers", {
@@ -45,7 +39,7 @@ class Main extends Component {
       .then(res => res.json())
       .then(beers => {
         if (beers.length === 0) {
-          throw new Error('No results found!')
+          throw new Error("No results found!");
         } else {
           this.setState({ beers, loading: false });
         }
@@ -57,11 +51,11 @@ class Main extends Component {
           loading: false
         });
       });
-  }
+  };
 
-  updateSearchInput(e) {
+  updateSearchInput = e => {
     this.setState({ searchInput: e.target.value });
-  }
+  };
 
   render() {
     const { loading, beers, error } = this.state;

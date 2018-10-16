@@ -15,7 +15,8 @@ class Nav extends Component {
               Hearts
             </Link>
           </p>
-          {/* <p>Log In</p>
+          {/* No user auth at this time...
+          <p>Log In</p>
           <p>Sign Up</p> */}
         </div>
       </nav>
