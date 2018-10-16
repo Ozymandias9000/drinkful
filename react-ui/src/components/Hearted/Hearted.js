@@ -2,17 +2,15 @@ import React, { Component } from "react";
 import BeerList from "../Main/BeerList/BeerList";
 
 class Hearted extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      heartedBeers: []
-    };
-  }
+  state = {
+    heartedBeers: []
+  };
 
   componentDidMount() {
     const heartedBeers = [];
     for (let i = 0; i < localStorage.length; i++) {
       let beerObj = JSON.parse(localStorage.key(i));
+      console.log(JSON.parse(localStorage.key(i)));
       heartedBeers.push(beerObj);
     }
     this.setState({ heartedBeers });
