@@ -10,7 +10,6 @@ class Hearted extends Component {
     const heartedBeers = [];
     for (let i = 0; i < localStorage.length; i++) {
       let beerObj = JSON.parse(localStorage.key(i));
-      console.log(JSON.parse(localStorage.key(i)));
       heartedBeers.push(beerObj);
     }
     this.setState({ heartedBeers });
